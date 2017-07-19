@@ -1,9 +1,15 @@
-const post = require("./lib/post");
+const axios = require("axios");
 
-module.exports = function stdrpc(url) {
+module.exports = function stdrpc(url, config = {}) {
+	if(typeof url !== "string") {
+		throw new Error("stdrpc: url must be a string");
+	}
+
 	return new Proxy({}, {
 		get(target, method) {
 			return function() {
+				method = (config.methodTransform || (a => a))(method);
+
 				const params = [...arguments];
 
 				const data = {
@@ -13,13 +19,11 @@ module.exports = function stdrpc(url) {
 					id: 1
 				};
 
-				return post(url, JSON.stringify(data))
-				.then(JSON.parse)
-				.then(res => {
-					if(res.error) {
-						throw new Error(res.error.data);
+				return axios.post(url, data, config.req || {}).then(res => {
+					if(res.data.error) {
+						throw new Error(`stdrpc: ${res.data.error.message}`);
 					} else {
-						return res.result;
+						return res.data.result;
 					}
 				});
 			}

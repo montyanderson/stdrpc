@@ -1,18 +1,39 @@
 # stdrpc
 
-Isomorphic, configuration-less JSON RPC module for Node.js.
+ES6+ compatible, isomorphic JSON-RPC module for node and the browser.
 
-* Supports on-the-fly RPC methods
-* Works in Browser and in Node
+* Supports on-the-fly RPC methods using [Proxies](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
+* Works in browser and in node
 * Very small codebase
+* Uses [axios](https://github.com/mzabriskie/axios) behind the scenes
 
 ## Usage
 
 ``` javascript
-// Connecting to an Ethereum Geth node
-const web3 = stdrpc("http://localhost:8545");
+const rpc = stdrpc("http://localhost:8332");
 
-web3.eth_coinbase().then(address => {
-	console.log(address);
+rpc.getbalance().then(balance => {
+	// woo!
 });
+```
+
+## API
+
+### stdrpc(url [, options ])
+
+Returns a proxied object, returning a function for every method.
+
+#### options
+
+##### methodTransform
+
+A `Function` which all method names will be passed through.
+
+``` javascript
+// connecting to an ethereum node
+const rpc = stdrpc("http://localhost:8545", {
+	methodTransform: require("decamelize")
+});
+
+rpc.ethCoinbase() // becomes rpc.eth_coinbase()
 ```
