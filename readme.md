@@ -2,7 +2,7 @@
 
 ES6+ compatible, isomorphic JSON-RPC module for node and the browser.
 
-* Compatible with [Bitcoin](https://bitcoin.org/), [Ethereum](https://www.ethereum.org/), [Zcash](https://z.cash/), and many more.
+* Compatible with [Komodo](https://komodoplatform.com), [Bitcoin](https://bitcoin.org/), [Ethereum](https://www.ethereum.org/), [Zcash](https://z.cash/), and many more.
 * Supports on-the-fly RPC methods using [Proxies](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
 * Works in browser and in node
 * Very small codebase
@@ -11,10 +11,19 @@ ES6+ compatible, isomorphic JSON-RPC module for node and the browser.
 ## Usage
 
 ``` javascript
-const rpc = stdrpc("http://localhost:8332");
+const rpc = stdrpc("http://localhost:7771");
 
 rpc.getbalance().then(balance => {
 	// woo!
+});
+
+const rpc = stdrpc('http://localhost:7771', {
+    req: {
+        auth: {
+			username: "__username__",
+			password: "__password__"
+		}
+    }
 });
 ```
 
