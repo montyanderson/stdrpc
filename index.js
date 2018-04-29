@@ -29,7 +29,7 @@ module.exports = function stdrpc(url, config = {}) {
 					jsonrpc: "2.0",
 					method,
 					params,
-					id: 1
+					id: Date.now()
 				};
 
 				return axios.post(url, data, config.req || {}).then(res => {
