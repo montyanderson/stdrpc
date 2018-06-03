@@ -36,6 +36,22 @@ describe("stdrpc", () => {
 
 	const rpc = stdrpc("http://localhost:8000");
 
+	it("should throw on bad url", () => {
+		assert.throws(() => stdrpc(100));
+	});
+
+	it("should have every possible method", () => {
+		assert.equal("sum" in rpc, true);
+	});
+
+	it("should support overwrites", () => {
+		const func = (a, b) => a * b;
+
+		rpc.multiply = func;
+
+		assert(rpc.multiply === func);
+	});
+
 	it("should send and receive correct request and response", async () => {
 		assert.equal(await rpc.sum(100, 200), 300);
 	});
