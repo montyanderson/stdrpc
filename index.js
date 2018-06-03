@@ -10,11 +10,9 @@ module.exports = function stdrpc(_config) {
 		..._config
 	};
 
-	const overwrites = {};
-
 	return new Proxy({}, {
 		set(target, method, handler) {
-			overwrites[method] = handler; // allow overwriting of methods for testing
+			target[method] = handler; // allow overwriting of methods for testing
 		},
 
 		has() {
@@ -22,8 +20,8 @@ module.exports = function stdrpc(_config) {
 		},
 
 		get(target, method) {
-			if(typeof overwrites[method] === "function")
-				return overwrites[method];
+			if(typeof target[method] === "function")
+				return target[method];
 
 			return async (...params) => {
 				method = config.methodTransform(method);
