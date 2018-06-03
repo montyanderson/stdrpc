@@ -1,6 +1,6 @@
 {
   "name": "stdrpc",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "ES6+ compatible, isomorphic JSON-RPC module for node and the browser.",
   "main": "index.js",
   "scripts": {
@@ -11,8 +11,8 @@
     "type": "git",
     "url": "git+https://github.com/montyanderson/stdrpc.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Monty Anderson <work@montyanderson.net>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/montyanderson/stdrpc/issues"
   },
