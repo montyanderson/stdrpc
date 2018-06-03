@@ -1,9 +1,14 @@
 const axios = require("axios");
 
-module.exports = function stdrpc(url, config = {}) {
-	if(typeof url !== "string") {
-		throw new Error("stdrpc: url must be a string");
-	}
+module.exports = function stdrpc(_config) {
+	if(typeof _config !== "object")
+		throw new Error("Expected 'config' to be an object");
+
+	const config = {
+		url: "http://localhost:8332",
+		methodTransform: a => a,
+		..._config
+	};
 
 	const overwrites = {};
 
@@ -20,25 +25,31 @@ module.exports = function stdrpc(url, config = {}) {
 			if(typeof overwrites[method] === "function")
 				return overwrites[method];
 
-			return function() {
-				method = (config.methodTransform || (a => a))(method);
+			return async (...params) => {
+				method = config.methodTransform(method);
 
-				const params = [...arguments];
-
-				const data = {
+				const requestData = {
 					jsonrpc: "2.0",
 					method,
 					params,
 					id: 1
 				};
 
-				return axios.post(url, data, config.req || {}).then(res => {
-					if(res.data.error)
-						throw new Error(`stdrpc: ${res.data.error.message}`);
+				const requestConfig = {};
 
-					return res.data.result;
-				});
-			}
+				if(typeof config.username === "string" && typeof config.password === "string")
+					requestConfig.auth = {
+						username: config.username,
+						password: config.password
+					};
+
+				const { data } = await axios.post(config.url, requestData, requestConfig);
+
+				if(data.error)
+					throw new Error(`${data.error.code}: ${data.error.message}`);
+
+				return data.result;
+			};
 		}
 	});
 };

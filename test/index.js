@@ -34,9 +34,11 @@ describe("stdrpc", () => {
 		this.server = app.listen(8000);
 	});
 
-	const rpc = stdrpc("http://localhost:8000");
+	const rpc = stdrpc({
+		url: "http://localhost:8000"
+	});
 
-	it("should throw on bad url", () => {
+	it("should throw on bad config", () => {
 		assert.throws(() => stdrpc(100));
 	});
 
