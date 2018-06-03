@@ -4,7 +4,8 @@
   "description": "ES6+ compatible, isomorphic JSON-RPC module for node and the browser.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test/*.js",
+    "coverage": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec --exit",
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,9 @@
   "homepage": "https://github.com/montyanderson/stdrpc#readme",
   "dependencies": {
     "axios": "^0.16.2"
+  },
+  "devDependencies": {
+    "istanbul": "^1.1.0-alpha.1",
+    "mocha": "^5.2.0"
   }
 }
