@@ -14,7 +14,9 @@ ES6+ compatible, isomorphic JSON-RPC module for node and the browser.
 ## Usage
 
 ``` javascript
-const rpc = stdrpc("http://localhost:8332");
+const rpc = stdrpc({
+	url: "http://localhost:8332"
+});
 
 rpc.getbalance().then(balance => {
 	// woo!
@@ -23,15 +25,27 @@ rpc.getbalance().then(balance => {
 
 ## API
 
-### stdrpc(url [, options ])
+### stdrpc(options)
 
 Returns a proxied object, returning a function for every method.
 
 #### options
 
+##### url
+
+A `string` address of the RPC server.
+
+##### username
+
+A `string` username for authentication.
+
+##### password
+
+A `string` password authentication.
+
 ##### methodTransform
 
-A `Function` which all method names will be passed through.
+A `function` which all method names will be passed through.
 
 ``` javascript
 // connecting to an ethereum node
