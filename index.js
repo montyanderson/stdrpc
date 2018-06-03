@@ -30,7 +30,7 @@ module.exports = function stdrpc(_config) {
 					jsonrpc: "2.0",
 					method,
 					params,
-					id: 1
+					id: Date.now()
 				};
 
 				const requestConfig = {};
