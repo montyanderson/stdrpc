@@ -33,23 +33,31 @@ Returns a proxied object, returning a function for every method.
 
 ##### url
 
-A `string` address of the RPC server.
+Type: `string`
+
+Address of the RPC server
 
 ##### username
 
-A `string` username for authentication.
+Type: `string`
+
+Username for authentication
 
 ##### password
 
-A `string` password authentication.
+Type: `string`
+
+Password authentication
 
 ##### methodTransform
 
-A `function` which all method names will be passed through.
+Type: `function`
+
+Transform function for method names
 
 ``` javascript
-// connecting to an ethereum node
-const rpc = stdrpc("http://localhost:8545", {
+const rpc = stdrpc({
+	url: "http://localhost:8545",
 	methodTransform: require("decamelize")
 });
 
