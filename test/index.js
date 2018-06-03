@@ -64,11 +64,21 @@ describe("stdrpc", () => {
 		assert(rpc.multiply === func);
 	});
 
-	it("should throw on bad auth", async () => {
+	it("should throw on incorrect auth", async () => {
 		const rpc = stdrpc({
 			...config,
 			username: "b",
 			password: "c"
+		});
+
+		await assert.rejects(async () => rpc.sum(100, 200));
+	});
+
+	it("should throw on bad auth", async () => {
+		const rpc = stdrpc({
+			...config,
+			username: false,
+			password: false
 		});
 
 		await assert.rejects(async () => rpc.sum(100, 200));
