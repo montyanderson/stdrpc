@@ -37,6 +37,12 @@ Type: `string`
 
 Address of the RPC server
 
+##### timeout
+
+Type: `number`
+
+Connection timeout. Default 0 (no timeout)
+
 ##### username
 
 Type: `string`

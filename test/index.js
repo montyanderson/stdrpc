@@ -95,6 +95,16 @@ describe("stdrpc", () => {
 		await assert.rejects(async () => rpc.divide());
 	});
 
+  it("should time out on invalid request with timeout", async () => {
+		const rpc = stdrpc({
+      ...config,
+		  timeout: 1,
+		});
+
+		await assert.rejects(async () => rpc.get());
+	});
+
+
 	after(function() {
 		this.server.close();
 	});
