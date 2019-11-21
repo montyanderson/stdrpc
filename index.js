@@ -41,6 +41,9 @@ module.exports = function stdrpc(_config) {
 						password: config.password
 					};
 
+        if(typeof config.timeout === "number")
+          requestConfig.timeout = config.timeout;
+          
 				const { data } = await axios.post(config.url, requestData, requestConfig);
 
 				if(data.error)

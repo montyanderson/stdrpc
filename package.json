@@ -1,6 +1,6 @@
 {
   "name": "stdrpc",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "ES6+ compatible, isomorphic JSON-RPC module for node and the browser.",
   "main": "index.js",
   "scripts": {
