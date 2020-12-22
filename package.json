@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/montyanderson/stdrpc#readme",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "koa-basic-auth": "^4.0.0"
   },
   "devDependencies": {
